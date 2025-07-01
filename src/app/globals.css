@@ -1,26 +1,137 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
+/* CSS Variables (HSL colors) */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background-h: 10;
+  --background-s: 10%;
+  --background-l: 6%;
+
+  --foreground-h: 120;
+  --foreground-s: 100%;
+  --foreground-l: 75%;
+
+  --neon-green-h: 120;
+  --neon-green-s: 100%;
+  --neon-green-l: 75%;
+
+  --neon-blue-h: 193;
+  --neon-blue-s: 100%;
+  --neon-blue-l: 50%;
+
+  --cyber-gray-h: 0;
+  --cyber-gray-s: 0%;
+  --cyber-gray-l: 8%;
+
+  --radius: 0.5rem;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* Base styles */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  min-height: 100vh;
+  position: relative;
+
+  background-color: hsl(var(--background-h), var(--background-s), var(--background-l));
+  color: hsl(var(--foreground-h), var(--foreground-s), var(--foreground-l));
+  font-family: 'Courier Prime', monospace;
+
+  background-image:
+    radial-gradient(circle at 20% 80%, rgba(0, 255, 65, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(0, 204, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(191, 0, 255, 0.1) 0%, transparent 50%);
+}
+
+/* Scan lines effect */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  background:
+    linear-gradient(
+      transparent 50%,
+      rgba(0, 255, 65, 0.03) 50%
+    );
+  background-size: 100% 4px;
+
+  pointer-events: none;
+  z-index: 1000;
+}
+
+/* Retro Button */
+.retro-button {
+  background-color: transparent;
+  border: 2px solid hsl(var(--neon-green-h), var(--neon-green-s), var(--neon-green-l));
+  color: hsl(var(--neon-green-h), var(--neon-green-s), var(--neon-green-l));
+  padding: 0.75rem 1.5rem;
+
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: var(--radius);
+
+  box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+}
+
+.retro-button:hover {
+  background-color: hsl(var(--neon-green-h), var(--neon-green-s), var(--neon-green-l));
+  color: black;
+  box-shadow: 0 0 20px rgba(0, 255, 65, 0.6);
+}
+
+/* Retro Card */
+.retro-card {
+  background-color: hsl(var(--cyber-gray-h), var(--cyber-gray-s), var(--cyber-gray-l));
+  border: 1px solid rgba(0, 204, 255, 0.3);
+  backdrop-filter: blur(5px);
+
+  box-shadow:
+    0 0 20px rgba(0, 204, 255, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+
+  border-radius: var(--radius);
+  padding: 1rem;
+
+  color: hsl(var(--neon-green-h), var(--neon-green-s), var(--neon-green-l));
+  font-family: 'Courier Prime', monospace;
+}
+
+/* Neon Text */
+.neon-text {
+  color: hsl(var(--neon-green-h), var(--neon-green-s), var(--neon-green-l));
+  text-shadow:
+    0 0 5px currentColor,
+    0 0 10px currentColor,
+    0 0 15px currentColor;
+}
+
+/* Cyber Grid Background */
+.cyber-grid {
+  background-color: black;
+  background-image:
+    linear-gradient(rgba(0, 204, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 204, 255, 0.1) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+
+
+.coin-flip img {
+  animation: spin3d 1s linear infinite;
+  transform-style: preserve-3d;
+}
+
+@keyframes spin3d {
+  from { transform: rotateY(0deg); }
+  to   { transform: rotateY(360deg); }
 }

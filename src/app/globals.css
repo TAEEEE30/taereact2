@@ -1,8 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* CSS Variables (HSL colors) */
+
 :root {
   --background-h: 10;
   --background-s: 10%;
@@ -20,30 +23,58 @@
   --neon-blue-s: 100%;
   --neon-blue-l: 50%;
 
-  --cyber-gray-h: 0;
-  --cyber-gray-s: 0%;
-  --cyber-gray-l: 8%;
-
+  --neon-blue: hsl(var(--neon-blue-h), var(--neon-blue-s), var(--neon-blue-l));
   --radius: 0.5rem;
+
+  --neon-purple-h: 280; 
+  --neon-purple-s: 100%;
+  --neon-purple-l: 60%;
+} 
+
+
+.font-orbitron {
+  font-family: 'Orbitron', monospace;
 }
 
-/* Base styles */
+.text-foreground-80 {
+  color: hsl(var(--foreground-h), var(--foreground-s), var(--foreground-l), 0.8);
+}
+
+.font-courier {
+  font-family: 'Courier Prime', monospace;
+}
+
+
+.text-neon-green {
+  color: hsl(var(--neon-green-h), var(--neon-green-s), var(--neon-green-l));
+}
+
+.hover\:text-neon-green:hover {
+  color: hsl(var(--neon-green-h), var(--neon-green-s), var(--neon-green-l));
+}
+
+
+.border-neon-blue\/30 {
+  border-color: hsla(var(--neon-blue-h), var(--neon-blue-s), var(--neon-blue-l), 0.3);
+}
+
+.text-neon-purple {
+  color: hsl(var(--neon-purple-h), var(--neon-purple-s), var(--neon-purple-l));
+}
+
 body {
   margin: 0;
-  min-height: 100vh;
+
   position: relative;
+  font-family: 'Courier Prime', monospace;
 
   background-color: hsl(var(--background-h), var(--background-s), var(--background-l));
   color: hsl(var(--foreground-h), var(--foreground-s), var(--foreground-l));
-  font-family: 'Courier Prime', monospace;
 
-  background-image:
-    radial-gradient(circle at 20% 80%, rgba(0, 255, 65, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(0, 204, 255, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 40% 40%, rgba(191, 0, 255, 0.1) 0%, transparent 50%);
+
+  
 }
 
-/* Scan lines effect */
 body::before {
   content: '';
   position: fixed;
@@ -52,62 +83,64 @@ body::before {
 
   width: 100%;
   height: 100%;
-
-  background:
-    linear-gradient(
-      transparent 50%,
-      rgba(0, 255, 65, 0.03) 50%
-    );
+  background: linear-gradient(transparent 50%, rgba(0, 255, 65, 0.03) 50%);
   background-size: 100% 4px;
-
   pointer-events: none;
-  z-index: 1000;
+  z-index: 0;
 }
 
-/* Retro Button */
 .retro-button {
-  background-color: transparent;
-  border: 2px solid hsl(var(--neon-green-h), var(--neon-green-s), var(--neon-green-l));
+  background: transparent;
+  border: 2px solid rgb(0 255 65 / var(--tw-border-opacity, 1));
   color: hsl(var(--neon-green-h), var(--neon-green-s), var(--neon-green-l));
-  padding: 0.75rem 1.5rem;
-
-  font-family: 'Orbitron', sans-serif;
-  font-weight: 700;
+  padding: 1rem 1.5rem;
+  font-family: 'Orbitron', monospace;
+  font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-
-  cursor: pointer;
-  transition: all 0.3s ease;
-  border-radius: var(--radius);
-
+  transition: all 0.3s ease-in-out;
   box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
 }
 
 .retro-button:hover {
-  background-color: hsl(var(--neon-green-h), var(--neon-green-s), var(--neon-green-l));
+  background: hsl(var(--neon-green-h), var(--neon-green-s), var(--neon-green-l));
   color: black;
   box-shadow: 0 0 20px rgba(0, 255, 65, 0.6);
 }
 
-/* Retro Card */
-.retro-card {
-  background-color: hsl(var(--cyber-gray-h), var(--cyber-gray-s), var(--cyber-gray-l));
-  border: 1px solid rgba(0, 204, 255, 0.3);
-  backdrop-filter: blur(5px);
 
+.retro-card {
+  background-color: #1a1a1a; 
+  border: 1px solid rgba(0, 204, 255, 0.3); 
+  backdrop-filter: blur(4px); 
   box-shadow:
     0 0 20px rgba(0, 204, 255, 0.1),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
-
-  border-radius: var(--radius);
-  padding: 1rem;
-
-  color: hsl(var(--neon-green-h), var(--neon-green-s), var(--neon-green-l));
-  font-family: 'Courier Prime', monospace;
+  border-radius: 0.5rem; 
 }
 
-/* Neon Text */
-.neon-text {
+
+
+.neon-text-purple {
+  color: hsl(var(--neon-purple-h), var(--neon-purple-s), var(--neon-purple-l));
+  text-shadow:
+    0 0 5px currentColor,
+    0 0 10px currentColor,
+    0 0 15px currentColor;
+}
+
+
+.border-neon-purple {
+  border-color: hsl(var(--neon-purple-h), var(--neon-purple-s), var(--neon-purple-l));
+}
+
+.hover\:bg-neon-purple:hover {
+  background-color: hsl(var(--neon-purple-h), var(--neon-purple-s), var(--neon-purple-l));
+}
+
+
+
+.neon-text-green {
   color: hsl(var(--neon-green-h), var(--neon-green-s), var(--neon-green-l));
   text-shadow:
     0 0 5px currentColor,
@@ -115,7 +148,16 @@ body::before {
     0 0 15px currentColor;
 }
 
-/* Cyber Grid Background */
+.neon-text-blue {
+  color: hsl(var(--neon-blue-h), var(--neon-blue-s), var(--neon-blue-l));
+  text-shadow:
+    0 0 5px currentColor,
+    0 0 10px currentColor,
+    0 0 15px currentColor;
+}
+
+
+
 .cyber-grid {
   background-color: black;
   background-image:
@@ -124,8 +166,6 @@ body::before {
   background-size: 50px 50px;
 }
 
-
-
 .coin-flip img {
   animation: spin3d 1s linear infinite;
   transform-style: preserve-3d;
@@ -133,5 +173,47 @@ body::before {
 
 @keyframes spin3d {
   from { transform: rotateY(0deg); }
-  to   { transform: rotateY(360deg); }
+  to { transform: rotateY(360deg); }
+}
+
+.via-neon-green {
+  --tw-gradient-from: transparent;
+  --tw-gradient-to: transparent;
+  --tw-gradient-stops: var(--tw-gradient-from), #4ade80, var(--tw-gradient-to);
+}
+
+.bg-neon-green {
+  background-color: #4ade80; /* Tailwind green-400 hex */
+}
+
+.animate-glow {
+  animation: glow 1.5s infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 5px #4ade80;
+  }
+  to {
+    text-shadow: 0 0 20px #4ade80;
+  }
+}
+
+
+.skill-level {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.skill-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.2);
+  transition: background-color 0.3s ease;
+}
+
+.skill-dot.filled {
+  background-color: #39FF14; /* สีเขียวเรืองแสง */
 }

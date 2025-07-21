@@ -1,6 +1,14 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Orbitron } from "next/font/google";
+import { Navigation } from "@/components/Navigation";
 import "./globals.css";
+    
+const orbitron = Orbitron({
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+  variable: "--font-orbitron",
+  display: "swap",
+});
 
 const geist = Geist({
   subsets: ["latin"],
@@ -23,11 +31,22 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}:{ children: React.ReactNode }) {
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html lang="en" className={`${geist.variable} ${geistMono.variable}`}>
+    <html
+      lang="en"
+      className={`${geist.variable} ${geistMono.variable} ${orbitron.variable}`}
+    >
       <body>
-        {children}
+        <header>
+          <Navigation />
+        </header>
+
+        <main className="pt-16">
+          {children}
+        </main>
       </body>
     </html>
   );
